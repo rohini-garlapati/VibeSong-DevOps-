@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ mood.capitalize() }} Vibes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>{{ mood.capitalize() }} Vibes 🎧</h1>
+    <p>Enjoy your personalized playlist!</p>
+    
+    <div class="grid">
+      {% for song in songs %}
+      <div class="card">
+        <img src="{{ song.thumb }}" alt="{{ song.title }}">
+        <h3>{{ song.title }}</h3>
+        <iframe src="{{ song.url }}" frameborder="0" allowfullscreen></iframe>
+      </div>
+      {% endfor %}
+    </div>
+
+    <a href="/" class="back">← Choose another mood</a>
+  </div>
+</body>
+</html>
