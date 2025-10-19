@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                echo "Building VibeSong Docker Image..."
+                bat "docker build -t vibesong:v1 ."
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                echo "Logging into Docker Hub..."
+                bat 'docker login -u rohinigarlapati -p <your-dockerhub-password>'
+            }
+        }
+
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                echo "Pushing Docker Image to Docker Hub..."
+                bat 'docker tag vibesong:v1 rohinigarlapati/vibesong:latest'
+                bat 'docker push rohinigarlapati/vibesong:latest'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo "Deploying VibeSong Application to Kubernetes..."
+                bat 'kubectl apply -f deployment.yaml --validate=true'
+                bat 'kubectl apply -f service.yaml'
+            }
+        }
+    }
+}

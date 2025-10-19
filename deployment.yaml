@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vibesong-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vibesong
+  template:
+    metadata:
+      labels:
+        app: vibesong
+    spec:
+      containers:
+        - name: vibesong-container
+          image: rohinigarlapati/vibesong:latest
+          ports:
+            - containerPort: 5000
