@@ -39,5 +39,12 @@ pipeline {
                 bat 'kubectl apply -f service.yaml'
             }
         }
+stage('Force Rollout Refresh') {
+    steps {
+        echo "Restarting Kubernetes deployment to pull the new image..."
+        bat 'kubectl rollout restart deployment vibesong-deployment'
+    }
+}
+
     }
 }
