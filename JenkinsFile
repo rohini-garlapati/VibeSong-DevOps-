@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    stage('Checkout Latest Code') {
+    steps {
+        echo "Fetching the latest code from GitHub..."
+        bat 'git fetch --all'
+        bat 'git reset --hard origin/main'
+        }
+    }
 
     stages {
         stage('Build Docker Image') {
