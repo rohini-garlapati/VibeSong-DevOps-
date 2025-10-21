@@ -15,5 +15,6 @@ spec:
       containers:
         - name: vibesong-container
           image: rohinigarlapati/vibesong:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
